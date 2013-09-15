@@ -3,7 +3,11 @@
  * (c) 2013-2013 GoCardless, Ltd.
  * https://github.com/gocardless-ng/ng-gc-alert-directive.git
  * License: MIT
- */'use strict';
+ */
+(function(){
+'use strict';
+
+'use strict';
 
 angular.module('gc.alertController', [
   'gc.alertService'
@@ -111,7 +115,8 @@ angular.module('gc.alertService', [])
   }
 ]);
 
-angular.module('alert-template.html', []).run(function($templateCache) {
+angular.module('alert-template.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('alert-template.html',
     '<div class="alert" ng-class="type && \'alert--\' + type"><div class="site__container"><div class="alert__content"><i class="alert__content__icon" ng-class="type && \'alert__content__icon--\' + type"></i><div ng-transclude=""></div><i class="alert__content__close ss-delete" ng-click="close()"></i></div></div></div>');
-});
+}]);
+})();
