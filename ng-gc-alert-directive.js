@@ -41,26 +41,11 @@ angular.module('gc.alert', [
         type: '@',
         close: '&'
       },
-      link: function alertDirectiveLink(scope, element) {
-        function apply(fn) {
-          return function() {
-            scope.$apply(fn);
-          };
-        }
-
-        // window needed for initial transition
-        $window.setTimeout(apply(function() {
-          element.addClass('alert--show');
-        }), 0);
-
+      link: function alertDirectiveLink(scope) {
         // Hide
-        $window.setTimeout(apply(function() {
-          element.removeClass('alert--show');
-          // Remove element
-          $window.setTimeout(apply(function() {
-            scope.close();
-          }), 500);
-        }), 3500);
+        $window.setTimeout(scope.$apply(function() {
+          scope.close();
+        }), 5000);
 
         var hasShown;
         scope.$watch(function alertPathWatch() {
@@ -115,8 +100,8 @@ angular.module('gc.alertService', [])
   }
 ]);
 
-angular.module('alert-template.html', []).run(['$templateCache', function($templateCache) {
+angular.module('alert-template.html', []).run(function($templateCache) {
   $templateCache.put('alert-template.html',
-    '<div class="alert" ng-class="type && \'alert--\' + type"><div class="site__container"><div class="alert__content"><i class="alert__content__icon" ng-class="type && \'alert__content__icon--\' + type"></i><div ng-transclude=""></div><i class="alert__content__close ss-delete" ng-click="close()"></i></div></div></div>');
-}]);
+    '<div class="alert"><div class="notification u-relative"><span ng-transclude=""></span> <a href="" ng-click="close()">close</a></div></div>');
+});
 })();
