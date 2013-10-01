@@ -16,26 +16,11 @@ angular.module('gc.alert', [
         type: '@',
         close: '&'
       },
-      link: function alertDirectiveLink(scope, element) {
-        function apply(fn) {
-          return function() {
-            scope.$apply(fn);
-          };
-        }
-
-        // window needed for initial transition
-        $window.setTimeout(apply(function() {
-          element.addClass('alert--show');
-        }), 0);
-
+      link: function alertDirectiveLink(scope) {
         // Hide
-        $window.setTimeout(apply(function() {
-          element.removeClass('alert--show');
-          // Remove element
-          $window.setTimeout(apply(function() {
-            scope.close();
-          }), 500);
-        }), 3500);
+        $window.setTimeout(scope.$apply(function() {
+          scope.close();
+        }), 5000);
 
         var hasShown;
         scope.$watch(function alertPathWatch() {
