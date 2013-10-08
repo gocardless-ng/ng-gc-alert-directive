@@ -100,8 +100,8 @@ angular.module('gc.alertService', [])
   }
 ]);
 
-angular.module('alert-template.html', []).run(function($templateCache) {
+angular.module('alert-template.html', []).run(['$templateCache', function($templateCache) {
   $templateCache.put('alert-template.html',
     '<div class="alert"><div class="notification u-relative"><span ng-transclude=""></span> <a href="" ng-click="close()">close</a></div></div>');
-});
+}]);
 })();
