@@ -43,9 +43,9 @@ angular.module('gc.alert', [
       },
       link: function alertDirectiveLink(scope) {
         // Hide
-        $window.setTimeout(scope.$apply(function() {
-          scope.close();
-        }), 5000);
+        $window.setTimeout(function() {
+          scope.$apply(scope.close);
+        }, 5000);
 
         var hasShown;
         scope.$watch(function alertPathWatch() {
